@@ -56,6 +56,16 @@ npm run dev
 Frontend: `http://localhost:5173`  
 API: `http://localhost:4000`
 
+## Entorno completo con Docker
+
+Con Docker Desktop iniciado, puedes levantar MySQL y la API con:
+
+```bash
+docker compose up --build
+```
+
+La API quedará en `http://localhost:4000`. Para que GitHub Pages use una API pública, configura el secreto `VITE_API_URL` en `Settings > Secrets and variables > Actions` con una URL que termine en `/api`, por ejemplo `https://api.tudominio.com/api`, y vuelve a ejecutar el workflow.
+
 También están disponibles `npm run build` y `npm run lint`.
 
 ## API principal

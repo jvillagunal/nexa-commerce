@@ -1,0 +1,38 @@
+services:
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: nexa_commerce
+    ports:
+      - "3306:3306"
+    volumes:
+      - nexa_mysql:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      PORT: 4000
+      FRONTEND_URL: http://localhost:5173
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: nexa_commerce
+      DB_USER: root
+      DB_PASSWORD: root
+      JWT_SECRET: local-development-secret-change-me
+    ports:
+      - "4000:4000"
+volumes:
+  nexa_mysql:
