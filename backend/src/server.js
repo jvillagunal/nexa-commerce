@@ -7,7 +7,7 @@ import mysql from 'mysql2/promise'
 
 const app = express()
 const port = Number(process.env.PORT || 4000)
-const pool = mysql.createPool({ host: process.env.DB_HOST || 'localhost', port: Number(process.env.DB_PORT || 3306), user: process.env.DB_USER || 'root', password: process.env.DB_PASSWORD || '', database: process.env.DB_NAME || 'nexa_commerce', waitForConnections: true, connectionLimit: 10 })
+const pool = mysql.createPool({ host: process.env.DB_HOST || 'localhost', port: Number(process.env.DB_PORT || 3306), user: process.env.DB_USER || 'root', password: process.env.DB_PASSWORD || '', database: process.env.DB_NAME || 'nexa_commerce', ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined, waitForConnections: true, connectionLimit: 10 })
 const allowedOrigins = new Set([process.env.FRONTEND_URL || 'http://localhost:5173', 'https://jvillagunal.github.io'])
 app.use(cors({ origin: (origin, callback) => { if (!origin || allowedOrigins.has(origin)) return callback(null, true); return callback(new Error('Origen no permitido por CORS')) } }))
 app.use(express.json())
