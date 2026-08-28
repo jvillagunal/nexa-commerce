@@ -37,7 +37,7 @@ npm install
 copy .env.example .env
 ```
 
-Edita `.env` con las credenciales de tu base de datos. Después ejecuta `database/schema.sql` desde MySQL Workbench o el cliente de MySQL.
+Edita `.env` con las credenciales de tu base de datos. Después ejecuta `database/schema.sql` desde MySQL Workbench o el cliente de MySQL; el script crea las tablas en la base seleccionada por la conexión.
 
 ## Ejecución
 

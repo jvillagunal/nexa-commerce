@@ -1,2 +1,1 @@
-USE nexa_commerce;
 -- Create a user through POST /api/auth/register so its password is hashed with bcrypt.
