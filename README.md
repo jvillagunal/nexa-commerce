@@ -66,6 +66,19 @@ docker compose up --build
 
 La API quedará en `http://localhost:4000`. Para que GitHub Pages use una API pública, configura el secreto `VITE_API_URL` en `Settings > Secrets and variables > Actions` con una URL que termine en `/api`, por ejemplo `https://api.tudominio.com/api`, y vuelve a ejecutar el workflow.
 
+## Publicación gratuita de la API
+
+El archivo `render.yaml` deja preparada la API para Render Free. Para una prueba pública completa:
+
+1. Crea una cuenta gratuita en Aiven usando GitHub o Google y crea un servicio **MySQL**, base `nexa_commerce`.
+2. Ejecuta `database/schema.sql` en la consola SQL de Aiven y copia sus datos de conexión.
+3. En Render selecciona **New > Blueprint**, conecta `jvillagunal/nexa-commerce` y acepta `render.yaml`.
+4. Completa en Render `DB_HOST`, `DB_USER` y `DB_PASSWORD` con los datos de Aiven.
+5. Copia la URL de Render, termina en `/api` y créala como secreto `VITE_API_URL` en GitHub.
+6. Ejecuta de nuevo el workflow `Deploy Nexa to GitHub Pages`.
+
+La instancia gratuita de Render puede tardar alrededor de un minuto en despertar después de estar inactiva. La base gratuita de Aiven es adecuada para pruebas y pequeños prototipos, no para producción de alto tráfico.
+
 También están disponibles `npm run build` y `npm run lint`.
 
 ## API principal
