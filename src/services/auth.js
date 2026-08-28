@@ -4,7 +4,7 @@ const request = async (path, options = {}) => {
   const token = localStorage.getItem(SESSION_KEY)
   const response = await fetch(`${API_URL}${path}`, { ...options, headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}), ...(options.headers || {}) } })
   const body = await response.json().catch(() => ({}))
-  if (!response.ok) throw new Error(body.message || 'No fue posible conectar con el servidor.')
+  if (!response.ok) throw new Error(body.message || 'No fue posible completar la operación.')
   return body.data
 }
 export const api = { request }
