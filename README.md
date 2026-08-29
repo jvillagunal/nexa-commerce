@@ -103,7 +103,3 @@ Las rutas privadas requieren `Authorization: Bearer <token>`.
 5. Registra una venta desde Ventas.
 6. Comprueba el descuento de stock y las estadísticas del Resumen.
 
-## Estado del alcance
-
-La base funcional prioritaria y los módulos de gestión solicitados están implementados. Quedan como ampliaciones futuras el detalle completo de una venta, filtros por fechas en el historial y gráficos avanzados. No existen credenciales de prueba incluidas: se crean mediante el registro para evitar secretos compartidos.
-
