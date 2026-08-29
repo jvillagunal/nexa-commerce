@@ -1,5 +1,5 @@
 import './App.css'
-import { useEffect, useState } from 'react'
+import { Component, useEffect, useState } from 'react'
 import { api, authService } from './services/auth'
 import { Directory, Reports } from './features/Management'
 import ProductManager from './features/ProductManager'
@@ -10,7 +10,15 @@ const nav = [['dashboard', '▦', 'Resumen'], ['products', '□', 'Productos'], 
 
 function Brand() { return <div className="brand"><span className="brand-mark">N</span><span><strong>NEXA</strong><small>commerce</small></span></div> }
 
-export default function App() {
+export default function App() { return <AppErrorBoundary><CommerceApp /></AppErrorBoundary> }
+
+class AppErrorBoundary extends Component {
+  state = { hasError: false }
+  static getDerivedStateFromError() { return { hasError: true } }
+  render() { return this.state.hasError ? <section className="panel state-panel"><h2>No se pudo cargar este módulo</h2><p className="muted">Ocurrió un problema temporal al cambiar de sección.</p><button className="primary-button" onClick={() => this.setState({ hasError: false })}>Reintentar</button></section> : this.props.children }
+}
+
+function CommerceApp() {
   const [user, setUser] = useState(authService.getSession())
   const [view, setView] = useState('dashboard')
   const [toast, setToast] = useState('')
